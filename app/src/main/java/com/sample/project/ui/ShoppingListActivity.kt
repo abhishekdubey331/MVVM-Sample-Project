@@ -1,17 +1,16 @@
 package com.sample.project.ui
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_shopping_list.*
 import android.arch.lifecycle.ViewModelProviders
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
+import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -24,18 +23,22 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.sample.project.Injection
 import com.sample.project.R
 import com.sample.project.db.ShoppingListItem
+import com.sample.project.ui.adapters.ShoppingListAdapter
 import com.sample.project.ui.dto.ShoppingListDTO
 import com.sample.project.ui.listeners.RecyclerItemTouchHelper
 import com.sample.project.ui.listeners.RecyclerViewClickListener
-import com.sample.project.ui.adapters.ShoppingListAdapter
+import com.sample.project.utils.ConnectivityHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_shopping_list.*
 import kotlinx.android.synthetic.main.content_shopping_list.*
+import org.koin.android.ext.android.inject
 import java.util.*
 
 
@@ -47,13 +50,19 @@ class ShoppingListActivity : AppCompatActivity(), RecyclerItemTouchHelper.Recycl
     private var shoppingList = ArrayList<ShoppingListDTO>()
     private var mAdapter: ShoppingListAdapter? = null
     private var dialogCreateNamePositiveButton: Button? = null
+    private val connectivityHelper : ConnectivityHelper by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_list)
         setSupportActionBar(toolbar)
-
         viewModelFactory = Injection.provideViewModelFactory(this)
+
+        if (connectivityHelper.isConnected(this))
+            Toast.makeText(this,"Injected and running",Toast.LENGTH_SHORT).show()
+        else
+            Toast.makeText(this,"Not Connected Injected",Toast.LENGTH_SHORT).show()
+
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ShoppingListViewModel::class.java)
 
         mAdapter = ShoppingListAdapter(shoppingList, this, this)
