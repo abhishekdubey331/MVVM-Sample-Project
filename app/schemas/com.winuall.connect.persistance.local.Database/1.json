@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a0aea9bdf202bcb1ebce7a8ea0b77e1d",
+    "identityHash": "4113619787830a376c487760f153770d",
     "entities": [
       {
         "tableName": "cryptoCurrencies",
@@ -111,7 +111,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a0aea9bdf202bcb1ebce7a8ea0b77e1d\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"4113619787830a376c487760f153770d\")"
     ]
   }
 }

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\Open Source\\MVVM Application\\MVVM-Sample-Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
+            "outputFile": "E:\\Open Source\\MVVM Application\\MVVM-Sample-Project\\MVVM-Sample-Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\abhis\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.0.aar\\948fbc81bb51b7daa7d0f69452f0a948\\res\\values-v18\\values-v18.xml",
+                    "source": "C:\\Users\\abhis\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-28.0.0.aar\\86dcc3ba84e0fb90ee06d6389dcb1180\\res\\values-v18\\values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

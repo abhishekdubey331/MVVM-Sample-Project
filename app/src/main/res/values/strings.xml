@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Boilerplate</string>
+    <string name="app_name">Connect App</string>
     <string name="cryptocurrency_text">Cryptocurrency</string>
     <string name="cryptocurrency_error_message">There is an error getting the data: \n</string>
+    <string name="login">Login</string>
+
+
+    <string name="update_available">We have a new version on playstore.</string>
+    <string name="update_app">Update App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>

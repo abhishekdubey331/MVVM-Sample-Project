@@ -1,11 +1,6 @@
 package com.winuall.connect.persistance.dao;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
-import com.winuall.connect.data.model.CryptoCurrency;
-import io.reactivex.Single;
+import java.lang.System;
 
 /**
  * * Created by Abhishek Dubey on 9.06.2018 at 23:58.

@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.winuall.connect"
-    android:versionCode="10000"
-    android:versionName="1.0.0 Debug" >
+    package="com.connect.winuall"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="27" />
+        android:minSdkVersion="19"
+        android:targetSdkVersion="28" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
 
     <!-- To store the heap dumps and leak analysis results. -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- To allow starting foreground services on Android P+ - https://developer.android.com/preview/behavior-changes#fg-svc -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name="com.winuall.connect.App"
         android:allowBackup="true"
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -38,12 +30,25 @@
         <!-- Activities -->
         <activity android:name="com.winuall.connect.ui.login.LoginActivity" >
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.winuall.connect.ui.quizzes.QuizActivity" />
+        <activity android:name="com.winuall.connect.ui.profile.ProfileActivity" >
+        </activity>
+        <activity android:name="com.winuall.connect.ui.settings.SettingsActivity" >
+        </activity>
+        <activity android:name="com.winuall.connect.ui.notifications.NotificationsActivity" >
+        </activity>
+
+        <provider
+            android:name="android.arch.lifecycle.ProcessLifecycleOwnerInitializer"
+            android:authorities="com.connect.winuall.lifecycle-trojan"
+            android:exported="false"
+            android:multiprocess="true" />
 
         <service
             android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"
@@ -54,13 +59,23 @@
             android:enabled="false"
             android:process=":leakcanary" />
 
+        <provider
+            android:name="com.squareup.leakcanary.internal.LeakCanaryFileProvider"
+            android:authorities="com.squareup.leakcanary.fileprovider.com.connect.winuall"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/leak_canary_file_paths" />
+        </provider>
+
         <activity
             android:name="com.squareup.leakcanary.internal.DisplayLeakActivity"
             android:enabled="false"
-            android:icon="@drawable/leak_canary_icon"
+            android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_display_activity_label"
             android:process=":leakcanary"
-            android:taskAffinity="com.squareup.leakcanary.com.winuall.connect"
+            android:taskAffinity="com.squareup.leakcanary.com.connect.winuall"
             android:theme="@style/leak_canary_LeakCanary.Base" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,17 +87,12 @@
             android:name="com.squareup.leakcanary.internal.RequestStoragePermissionActivity"
             android:enabled="false"
             android:excludeFromRecents="true"
-            android:icon="@drawable/leak_canary_icon"
+            android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_storage_permission_activity_label"
             android:process=":leakcanary"
-            android:taskAffinity="com.squareup.leakcanary.com.winuall.connect"
+            android:roundIcon="@mipmap/leak_canary_icon"
+            android:taskAffinity="com.squareup.leakcanary.com.connect.winuall"
             android:theme="@style/leak_canary_Theme.Transparent" />
-
-        <provider
-            android:name="android.arch.lifecycle.ProcessLifecycleOwnerInitializer"
-            android:authorities="com.winuall.connect.lifecycle-trojan"
-            android:exported="false"
-            android:multiprocess="true" />
     </application>
 
 </manifest>

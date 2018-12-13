@@ -11,11 +11,11 @@ import io.reactivex.Single;
 import java.lang.Exception;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.List;
 import java.util.concurrent.Callable;
-import javax.annotation.Generated;
 
-@Generated("android.arch.persistence.room.RoomProcessor")
+@SuppressWarnings("unchecked")
 public class CryptoCurrencyDao_Impl implements CryptoCurrencyDao {
   private final RoomDatabase __db;
 
@@ -133,6 +133,7 @@ public class CryptoCurrencyDao_Impl implements CryptoCurrencyDao {
     _argIndex = 2;
     _statement.bindLong(_argIndex, offset);
     return Single.fromCallable(new Callable<List<CryptoCurrency>>() {
+      @Override
       public List<CryptoCurrency> call() throws Exception {
         final Cursor _cursor = __db.query(_statement);
         try {
@@ -197,8 +198,12 @@ public class CryptoCurrencyDao_Impl implements CryptoCurrencyDao {
           return _result;
         } finally {
           _cursor.close();
-          _statement.release();
         }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
       }
     });
   }

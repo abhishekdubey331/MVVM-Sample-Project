@@ -1,11 +1,6 @@
 package com.winuall.connect.data.remote;
 
-import com.winuall.connect.data.model.CryptoCurrency;
-import com.winuall.connect.data.model.QuizResponse;
-import com.winuall.connect.data.model.UserResponse;
-import io.reactivex.Observable;
-import io.reactivex.Single;
-import retrofit2.http.*;
+import java.lang.System;
 
 /**
  * * Created by Abhishek Dubey on 10.06.2018 at 00:14.
@@ -21,7 +16,7 @@ public abstract interface ApiInterface {
     java.lang.String start);
     
     @org.jetbrains.annotations.NotNull()
-    @retrofit2.http.POST(value = "/api/auth/login")
+    @retrofit2.http.POST(value = "auth/login")
     @retrofit2.http.FormUrlEncoded()
     public abstract io.reactivex.Single<com.winuall.connect.data.model.UserResponse> makeLoginOnServer(@org.jetbrains.annotations.NotNull()
     @retrofit2.http.Field(value = "phone")
@@ -30,7 +25,7 @@ public abstract interface ApiInterface {
     java.lang.String password);
     
     @org.jetbrains.annotations.NotNull()
-    @retrofit2.http.GET(value = "/api/quizzes?syllabus=0&type=Exam")
+    @retrofit2.http.GET(value = "quizzes?syllabus=0&type=Exam")
     public abstract io.reactivex.Single<com.winuall.connect.data.model.QuizResponse> getQuizzesForUser(@org.jetbrains.annotations.NotNull()
     @retrofit2.http.Header(value = "Authorization")
     java.lang.String contentRange);

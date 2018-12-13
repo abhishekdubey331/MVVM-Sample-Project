@@ -1,2 +1,2 @@
-# Referenced at E:\Open Source\MVVM Application\MVVM-Sample-Project\app\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:28
+# Referenced at E:\Open Source\MVVM Application\MVVM-Sample-Project\MVVM-Sample-Project\app\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:19
 -keep class com.winuall.connect.App { <init>(...); }

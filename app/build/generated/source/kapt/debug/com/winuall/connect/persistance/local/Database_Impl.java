@@ -17,26 +17,30 @@ import com.winuall.connect.persistance.dao.CryptoCurrencyDao_Impl;
 import java.lang.IllegalStateException;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.SuppressWarnings;
 import java.util.HashMap;
 import java.util.HashSet;
-import javax.annotation.Generated;
 
-@Generated("android.arch.persistence.room.RoomProcessor")
+@SuppressWarnings("unchecked")
 public class Database_Impl extends Database {
   private volatile CryptoCurrencyDao _cryptoCurrencyDao;
 
+  @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
+      @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `cryptoCurrencies` (`id` TEXT NOT NULL, `name` TEXT, `symbol` TEXT NOT NULL, `rank` INTEGER NOT NULL, `price_usd` REAL, `price_btc` TEXT, `24h_volume_usd` TEXT, `market_cap_usd` TEXT, `available_supply` TEXT, `total_supply` TEXT, `max_supply` TEXT, `percent_change_1h` TEXT, `percent_change_24h` TEXT, `percent_change_7d` TEXT, `last_updated` REAL NOT NULL, PRIMARY KEY(`id`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"a0aea9bdf202bcb1ebce7a8ea0b77e1d\")");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"4113619787830a376c487760f153770d\")");
       }
 
+      @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("DROP TABLE IF EXISTS `cryptoCurrencies`");
       }
 
+      @Override
       protected void onCreate(SupportSQLiteDatabase _db) {
         if (mCallbacks != null) {
           for (int _i = 0, _size = mCallbacks.size(); _i < _size; _i++) {
@@ -45,6 +49,7 @@ public class Database_Impl extends Database {
         }
       }
 
+      @Override
       public void onOpen(SupportSQLiteDatabase _db) {
         mDatabase = _db;
         internalInitInvalidationTracker(_db);
@@ -55,6 +60,7 @@ public class Database_Impl extends Database {
         }
       }
 
+      @Override
       protected void validateMigration(SupportSQLiteDatabase _db) {
         final HashMap<String, TableInfo.Column> _columnsCryptoCurrencies = new HashMap<String, TableInfo.Column>(15);
         _columnsCryptoCurrencies.put("id", new TableInfo.Column("id", "TEXT", true, 1));
@@ -82,7 +88,7 @@ public class Database_Impl extends Database {
                   + " Found:\n" + _existingCryptoCurrencies);
         }
       }
-    }, "a0aea9bdf202bcb1ebce7a8ea0b77e1d");
+    }, "4113619787830a376c487760f153770d", "a0aea9bdf202bcb1ebce7a8ea0b77e1d");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -94,6 +100,23 @@ public class Database_Impl extends Database {
   @Override
   protected InvalidationTracker createInvalidationTracker() {
     return new InvalidationTracker(this, "cryptoCurrencies");
+  }
+
+  @Override
+  public void clearAllTables() {
+    super.assertNotMainThread();
+    final SupportSQLiteDatabase _db = super.getOpenHelper().getWritableDatabase();
+    try {
+      super.beginTransaction();
+      _db.execSQL("DELETE FROM `cryptoCurrencies`");
+      super.setTransactionSuccessful();
+    } finally {
+      super.endTransaction();
+      _db.query("PRAGMA wal_checkpoint(FULL)").close();
+      if (!_db.inTransaction()) {
+        _db.execSQL("VACUUM");
+      }
+    }
   }
 
   @Override

@@ -1,7 +1,6 @@
 package com.winuall.connect.utils;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import java.lang.System;
 
 /**
  * * Created by Abhishek Dubey on 10.06.2018 at 00:58.

@@ -1,10 +1,6 @@
 package com.winuall.connect.data.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import com.squareup.moshi.Json;
-import java.io.Serializable;
+import java.lang.System;
 
 /**
  * * Created by Abhishek Dubey on 9.06.2018 at 23:50.
